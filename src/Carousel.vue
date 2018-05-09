@@ -463,7 +463,9 @@ export default {
      */
     /* istanbul ignore next */
     onStart(e) {
-      document.addEventListener(
+    if (typeof document !== "undefined") {
+
+       document.addEventListener(
         this.isTouch ? "touchend" : "mouseup",
         this.onEnd,
         true
@@ -474,7 +476,7 @@ export default {
         this.onDrag,
         true
       );
-
+}
       this.startTime = e.timeStamp;
       this.dragging = true;
       this.dragStartX = this.isTouch ? e.touches[0].clientX : e.clientX;
@@ -508,6 +510,8 @@ export default {
 
       this.render();
 
+      if (typeof document !== "undefined") {
+
       // clear events listeners
       document.removeEventListener(
         this.isTouch ? "touchend" : "mouseup",
@@ -519,6 +523,7 @@ export default {
         this.onDrag,
         true
       );
+  }
     },
     /**
      * Trigger actions when mouse is pressed and then moved (mouse drag)
